@@ -28,6 +28,7 @@
 *.bz2
 *.lzma
 *.gcno
+/scripts/
 
 #
 # Top-level generic files
