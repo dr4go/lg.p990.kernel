@@ -20,6 +20,7 @@
 *.mod.c
 *.i
 *.lst
+*.cpio
 *.symtypes
 *.order
 *.elf
@@ -28,7 +29,7 @@
 *.bz2
 *.lzma
 *.gcno
-/scripts/
+/scripts
 
 #
 # Top-level generic files
@@ -36,17 +37,20 @@
 tags
 TAGS
 vmlinux
+vmlinux.lds
 System.map
 Module.markers
 Module.symvers
 !.gitignore
 !.mailmap
+gen_init_cpio
 
 #
 # Generated include files
 #
 include/asm
 include/asm-*/asm-offsets.h
+include/asm-arm
 include/config
 include/linux/autoconf.h
 include/linux/compile.h
