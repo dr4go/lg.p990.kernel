@@ -10,7 +10,7 @@
 #include <linux/smp.h>
 #include <linux/unistd.h>
 #include <linux/init.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/smp.h>
 #include <asm/time.h>
 

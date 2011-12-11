@@ -99,7 +99,7 @@ static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
 
 #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
 
-static inline int atomic_add_unless(atomic_t *v, int a, int u)
+static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int ret;
 	unsigned long flags;
@@ -109,9 +109,8 @@ static inline int atomic_add_unless(atomic_t *v, int a, int u)
 	if (ret != u)
 		v->counter += a;
 	local_irq_restore(flags);
-	return ret != u;
+	return ret;
 }
-#define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
 
 static __inline__ void atomic_clear_mask(unsigned long mask, unsigned long *v)
 {
@@ -141,5 +140,4 @@ static __inline__ void atomic_set_mask(unsigned long mask, unsigned long *v)
 #define smp_mb__before_atomic_inc()    barrier()
 #define smp_mb__after_atomic_inc() barrier()
 
-#include <asm-generic/atomic-long.h>
 #endif /* __ARCH_H8300_ATOMIC __ */

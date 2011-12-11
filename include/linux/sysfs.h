@@ -15,7 +15,7 @@
 #include <linux/compiler.h>
 #include <linux/errno.h>
 #include <linux/list.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 struct kobject;
 struct module;

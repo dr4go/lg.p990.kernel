@@ -14,7 +14,7 @@
 #include <linux/radix-tree.h>
 
 #include <asm/types.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 
 #define get_irq_desc(irq) (&irq_desc[(irq)])

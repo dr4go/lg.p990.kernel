@@ -443,7 +443,7 @@ enum perf_callchain_context {
 #include <linux/fs.h>
 #include <linux/pid_namespace.h>
 #include <linux/workqueue.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 #define PERF_MAX_STACK_DEPTH		255
 

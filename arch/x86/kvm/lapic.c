@@ -31,7 +31,7 @@
 #include <asm/page.h>
 #include <asm/current.h>
 #include <asm/apicdef.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/apicdef.h>
 #include "kvm_cache_regs.h"
 #include "irq.h"

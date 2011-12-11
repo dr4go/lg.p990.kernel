@@ -30,7 +30,7 @@
 #include <linux/init.h>
 #include <linux/err.h>
 #include <linux/delay.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/uaccess.h>
 
 #include "ap_bus.h"

@@ -51,7 +51,7 @@
 #include <linux/ip.h>
 #include <net/net_namespace.h>
 #include <asm/hvcall.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/vio.h>
 #include <asm/iommu.h>
 #include <asm/uaccess.h>

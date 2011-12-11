@@ -23,7 +23,7 @@
 #include <linux/mutex.h>
 #include <linux/stat.h>
 
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/uaccess.h>
 
 #define MEMORY_CLASS_NAME	"memory"

@@ -12,7 +12,7 @@
 #include <linux/types.h>
 #include <linux/kernel.h>
 #include <asm/system.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 struct rw_semaphore;
 

@@ -34,7 +34,7 @@
 #include <linux/ftrace.h>
 
 #include <asm/system.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/current.h>
 #include <asm/delay.h>
 #include <asm/tlbflush.h>

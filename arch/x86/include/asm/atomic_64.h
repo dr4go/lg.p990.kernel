@@ -388,15 +388,15 @@ static inline long atomic_xchg(atomic_t *v, int new)
 }
 
 /**
- * atomic_add_unless - add unless the number is a given value
+ * __atomic_add_unless - add unless the number is already a given value
  * @v: pointer of type atomic_t
  * @a: the amount to add to v...
  * @u: ...unless v is equal to u.
  *
  * Atomically adds @a to @v, so long as it was not @u.
- * Returns non-zero if @v was not @u, and zero otherwise.
+ * Returns the old value of @v.
  */
-static inline int atomic_add_unless(atomic_t *v, int a, int u)
+static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int c, old;
 	c = atomic_read(v);
@@ -408,10 +408,8 @@ static inline int atomic_add_unless(atomic_t *v, int a, int u)
 			break;
 		c = old;
 	}
-	return c != (u);
+	return c;
 }
-
-#define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
 
 /**
  * atomic64_add_unless - add unless the number is a given value
@@ -481,5 +479,4 @@ static inline void atomic_or_long(unsigned long *v1, unsigned long v2)
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
 
-#include <asm-generic/atomic-long.h>
 #endif /* _ASM_X86_ATOMIC_64_H */

@@ -4,7 +4,7 @@
 
 #include <asm/processor.h>
 #include <asm/cmpxchg.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 static noinline u64 cmpxchg8b(u64 *ptr, u64 old, u64 new)
 {

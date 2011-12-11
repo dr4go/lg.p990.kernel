@@ -17,7 +17,7 @@
 #include <linux/linkage.h>
 #include <linux/init.h>
 
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/kgdb.h>
 
 struct pt_regs;

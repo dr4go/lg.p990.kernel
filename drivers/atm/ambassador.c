@@ -37,7 +37,7 @@
 #include <linux/firmware.h>
 #include <linux/ihex.h>
 
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/io.h>
 #include <asm/byteorder.h>
 

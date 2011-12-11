@@ -34,7 +34,7 @@
 #include <linux/ip.h>
 #include <linux/tcp.h>
 #include <linux/semaphore.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 #define SIXPACK_VERSION    "Revision: 0.3.0"
 

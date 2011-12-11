@@ -1,5 +1,7 @@
 /*
- * Generic C implementation of atomic counter operations
+ * Generic C implementation of atomic counter operations. Usable on
+ * UP systems only. Do not include in machine independent code.
+ *
  * Originally implemented for MN10300.
  *
  * Copyright (C) 2007 Red Hat, Inc. All Rights Reserved.
@@ -123,16 +125,14 @@ static inline void atomic_dec(atomic_t *v)
 #define atomic_dec_and_test(v)		(atomic_sub_return(1, (v)) == 0)
 #define atomic_inc_and_test(v)		(atomic_add_return(1, (v)) == 0)
 
-#define atomic_add_unless(v, a, u)				\
-({								\
-	int c, old;						\
-	c = atomic_read(v);					\
-	while (c != (u) && (old = atomic_cmpxchg((v), c, c + (a))) != c) \
-		c = old;					\
-	c != (u);						\
-})
-
-#define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
+static inline int __atomic_add_unless(atomic_t *v, int a, int u)
+{
+  int c, old;
+  c = atomic_read(v);
+  while (c != u && (old = atomic_cmpxchg(v, c, c + a)) != c)
+    c = old;
+  return c;
+}
 
 static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
 {
@@ -158,8 +158,6 @@ static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
-
-#include <asm-generic/atomic-long.h>
 
 #endif /* __KERNEL__ */
 #endif /* __ASM_GENERIC_ATOMIC_H */

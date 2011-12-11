@@ -20,7 +20,7 @@
 #include <linux/module.h>
 #include <linux/cpu.h>
 #include <linux/interrupt.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/processor.h>
 #include <asm/system.h>
 #include <asm/mmu_context.h>

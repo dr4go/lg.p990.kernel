@@ -49,7 +49,7 @@
 #include <net/tcp.h>
 #include <net/netlabel.h>
 #include <net/cipso_ipv4.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/bug.h>
 #include <asm/unaligned.h>
 

@@ -10,7 +10,7 @@
 #include <linux/bitops.h>
 #include <linux/init.h>
 #include <asm/uaccess.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 
 extern int atm_init_aal5(struct atm_vcc *vcc); /* "raw" AAL5 transport */

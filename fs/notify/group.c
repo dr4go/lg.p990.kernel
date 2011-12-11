@@ -26,7 +26,7 @@
 #include <linux/fsnotify_backend.h>
 #include "fsnotify.h"
 
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 /* protects writes to fsnotify_groups and fsnotify_mask */
 static DEFINE_MUTEX(fsnotify_grp_mutex);

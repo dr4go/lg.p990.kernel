@@ -30,7 +30,7 @@
 #include <linux/spinlock.h>
 #include <linux/string.h>
 
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/system.h>
 
 #include "core.h"

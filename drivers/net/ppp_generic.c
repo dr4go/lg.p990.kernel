@@ -47,7 +47,7 @@
 #include <linux/device.h>
 #include <linux/mutex.h>
 #include <net/slhc_vj.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 #include <linux/nsproxy.h>
 #include <net/net_namespace.h>

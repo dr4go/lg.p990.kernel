@@ -9,7 +9,7 @@
 #include <linux/skbuff.h>
 #include <linux/sonet.h>
 #include <linux/bitops.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/errno.h>
 
 

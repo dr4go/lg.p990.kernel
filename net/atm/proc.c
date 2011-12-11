@@ -25,7 +25,7 @@
 #include <net/net_namespace.h>
 #include <net/atmclip.h>
 #include <asm/uaccess.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/param.h> /* for HZ */
 #include "resources.h"
 #include "common.h" /* atm_proc_init prototype */

@@ -37,7 +37,7 @@
 #include <linux/platform_device.h>
 #include <linux/dma-mapping.h>
 #include <asm/gpio.h>
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 
 MODULE_AUTHOR("Eugene Konev <ejka@imfi.kspu.ru>");
 MODULE_DESCRIPTION("TI AR7 ethernet driver (CPMAC)");

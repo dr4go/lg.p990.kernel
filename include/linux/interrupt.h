@@ -15,7 +15,7 @@
 #include <linux/percpu.h>
 #include <linux/hrtimer.h>
 
-#include <asm/atomic.h>
+#include <linux/atomic.h>
 #include <asm/ptrace.h>
 #include <asm/system.h>
 
