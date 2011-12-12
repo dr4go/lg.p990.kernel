@@ -43,6 +43,7 @@
 #include <linux/time.h>
 #include <linux/kernel.h>
 #include <linux/kthread.h>
+#include <linux/kmemleak.h>
 #include <linux/mm.h>
 #include <linux/mutex.h>
 #include <linux/sched.h>

@@ -2280,8 +2280,8 @@ error_nodes:
 error_node_array:
 #if defined(CONFIG_NUMA) && defined(CONFIG_SMP)
 	kmem_cache_dyn_array_free(s->node_slab);
-#endif
 error_cpu_array:
+#endif
 #ifdef CONFIG_SMP
 	kmem_cache_dyn_array_free(s->cpu_slab);
 #endif
@@ -2398,19 +2398,40 @@ void kmem_cache_destroy(struct kmem_cache *s)
 			continue;
 		l = &n->list;
 
-#ifdef CONFIG_SMP
+	#ifdef CONFIG_SMP
 		claim_remote_free_list(s, l);
-#endif
+	#endif
 		flush_free_list_all(s, l);
 
-		WARN_ON(l->freelist.nr);loc_caches_dma[KMALLOC_SHIFT_SLQB_HIGH + 1] __cacheline_aligned;
+		WARN_ON(l->freelist.nr);
+		WARN_ON(l->nr_slabs);
+		WARN_ON(l->nr_partial);
+	}
+
+	free_kmem_cache_nodes(s);
+#endif
+	local_irq_enable();
+
+	sysfs_slab_remove(s);
+	up_write(&slqb_lock);
+}
+EXPORT_SYMBOL(kmem_cache_destroy);
+
+/********************************************************************
+ *             Kmalloc subsystem
+ *******************************************************************/
+
+struct kmem_cache kmalloc_caches[KMALLOC_SHIFT_SLQB_HIGH + 1] __cacheline_aligned;
+EXPORT_SYMBOL(kmalloc_caches);
+
+#ifdef CONFIG_ZONE_DMA
+struct kmem_cache kmalloc_caches_dma[KMALLOC_SHIFT_SLQB_HIGH + 1] __cacheline_aligned;
 EXPORT_SYMBOL(kmalloc_caches_dma);
 #endif
 
 #ifndef ARCH_KMALLOC_FLAGS
 #define ARCH_KMALLOC_FLAGS SLAB_HWCACHE_ALIGN
 #endif
-	local_irq_enable();
 
 static struct kmem_cache *open_kmalloc_cache(struct kmem_cache *s,
 				const char *name, int size, gfp_t gfp_flags)
@@ -2971,6 +2992,10 @@ void __init kmem_cache_init(void)
 	 * ordering with __slab_is_available.
 	 */
 	__slab_is_available = 1;
+}
+
+void __init kmem_cache_init_late(void)
+{
 }
 
 /*
