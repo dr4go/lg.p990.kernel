@@ -112,7 +112,7 @@ struct mce_log {
 
 #include <linux/percpu.h>
 #include <linux/init.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 extern int mce_disabled;
 extern int mce_p5_enabled;

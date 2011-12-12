@@ -131,7 +131,7 @@ static inline int atomic_sub_return(int i, atomic_t * v)
 #define atomic_cmpxchg(v, o, n) ((int)cmpxchg(&((v)->counter), (o), (n)))
 #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
 
-static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
+static __inline__ int atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int c, old;
 	c = atomic_read(v);
@@ -143,8 +143,10 @@ static __inline__ int __atomic_add_unless(atomic_t *v, int a, int u)
 			break;
 		c = old;
 	}
-	return c;
+	return c != (u);
 }
+
+#define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
 
 #define atomic_dec_return(v) atomic_sub_return(1,(v))
 #define atomic_inc_return(v) atomic_add_return(1,(v))

@@ -20,7 +20,7 @@
 #include <linux/interrupt.h>
 #include <linux/vmalloc.h>
 #include <video/sh_mobile_lcdc.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #define PALETTE_NR 16
 #define SIDE_B_OFFSET 0x1000

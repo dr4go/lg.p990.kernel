@@ -23,7 +23,7 @@
 #include <linux/module.h>
 #include <linux/pm.h>
 #include <linux/semaphore.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/device.h>
 
 struct device;

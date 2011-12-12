@@ -56,7 +56,7 @@ asynchronous and synchronous parts of the kernel.
 #include <linux/init.h>
 #include <linux/kthread.h>
 #include <linux/delay.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 static async_cookie_t next_cookie = 1;
 

@@ -15,7 +15,7 @@
 #include <linux/fs.h>
 #include <linux/sched.h>
 #include <linux/writeback.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 struct page;
 struct device;

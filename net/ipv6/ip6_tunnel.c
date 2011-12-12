@@ -39,7 +39,7 @@
 #include <linux/netfilter_ipv6.h>
 
 #include <asm/uaccess.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #include <net/icmp.h>
 #include <net/ip.h>

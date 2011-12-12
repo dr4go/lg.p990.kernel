@@ -14,7 +14,7 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/gfs2_ondisk.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <linux/slow-work.h>
 
 #include "gfs2.h"

@@ -32,7 +32,7 @@
 #include <asm/ptrace.h>
 #include <asm/irq.h>
 #include <asm/bitops.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/traps.h>
 
 #define IPIPE_ARCH_STRING     "1.11-00"

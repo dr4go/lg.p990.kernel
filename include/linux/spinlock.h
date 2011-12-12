@@ -318,7 +318,7 @@ static inline void smp_mb__after_lock(void) { smp_mb(); }
  * Pull the atomic_t declaration:
  * (asm-mips/atomic.h needs above definitions)
  */
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 /**
  * atomic_dec_and_lock - lock on reaching reference count zero
  * @atomic: the atomic counter

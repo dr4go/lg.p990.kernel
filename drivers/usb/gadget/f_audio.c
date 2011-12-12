@@ -11,7 +11,7 @@
 
 #include <linux/kernel.h>
 #include <linux/device.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #include "u_audio.h"
 

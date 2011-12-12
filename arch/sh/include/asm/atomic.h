@@ -60,7 +60,7 @@ static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
 	return ret;
 }
 
-static inline int __atomic_add_unless(atomic_t *v, int a, int u)
+static inline int atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int ret;
 	unsigned long flags;
@@ -71,16 +71,20 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 		v->counter += a;
 	local_irq_restore(flags);
 
-	return ret;
+	return ret != u;
 }
 #endif /* !CONFIG_GUSA_RB && !CONFIG_CPU_SH4A */
 
 #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
+#define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
 
 /* Atomic operations are already serializing on SH */
 #define smp_mb__before_atomic_dec()	barrier()
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
+
+#include <asm-generic/atomic-long.h>
+#include <asm-generic/atomic64.h>
 
 #endif /* __ASM_SH_ATOMIC_H */

@@ -5,7 +5,7 @@
 #include <linux/list.h>
 #include <linux/cpumask.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/pgtable.h>
 
 struct mm_struct init_mm = {

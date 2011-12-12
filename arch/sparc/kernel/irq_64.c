@@ -24,7 +24,7 @@
 
 #include <asm/ptrace.h>
 #include <asm/processor.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/system.h>
 #include <asm/irq.h>
 #include <asm/io.h>

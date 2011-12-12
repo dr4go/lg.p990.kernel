@@ -217,15 +217,15 @@ static inline int atomic_xchg(atomic_t *v, int new)
 }
 
 /**
- * __atomic_add_unless - add unless the number is already a given value
+ * atomic_add_unless - add unless the number is already a given value
  * @v: pointer of type atomic_t
  * @a: the amount to add to v...
  * @u: ...unless v is equal to u.
  *
  * Atomically adds @a to @v, so long as @v was not already @u.
- * Returns the old value of @v.
+ * Returns non-zero if @v was not @u, and zero otherwise.
  */
-static inline int __atomic_add_unless(atomic_t *v, int a, int u)
+static inline int atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int c, old;
 	c = atomic_read(v);
@@ -237,8 +237,10 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 			break;
 		c = old;
 	}
-	return c;
+	return c != (u);
 }
+
+#define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
 
 #define atomic_inc_return(v)  (atomic_add_return(1, v))
 #define atomic_dec_return(v)  (atomic_sub_return(1, v))
@@ -409,4 +411,5 @@ extern int atomic64_inc_and_test(atomic64_t *ptr);
  */
 extern int atomic64_add_negative(u64 delta, atomic64_t *ptr);
 
+#include <asm-generic/atomic-long.h>
 #endif /* _ASM_X86_ATOMIC_32_H */

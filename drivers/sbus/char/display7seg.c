@@ -15,7 +15,7 @@
 #include <linux/smp_lock.h>
 #include <linux/of.h>
 #include <linux/of_device.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/uaccess.h>		/* put_/get_user			*/
 #include <asm/io.h>
 

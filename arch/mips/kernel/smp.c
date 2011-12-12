@@ -33,7 +33,7 @@
 #include <linux/cpu.h>
 #include <linux/err.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/cpu.h>
 #include <asm/processor.h>
 #include <asm/r4k-timer.h>

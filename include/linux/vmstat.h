@@ -5,7 +5,7 @@
 #include <linux/percpu.h>
 #include <linux/mm.h>
 #include <linux/mmzone.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #ifdef CONFIG_ZONE_DMA
 #define DMA_ZONE(xx) xx##_DMA,

@@ -13,7 +13,7 @@
 #include <linux/list.h>
 #include <linux/nodemask.h>
 #include <linux/spinlock.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 struct super_block;
 struct vfsmount;

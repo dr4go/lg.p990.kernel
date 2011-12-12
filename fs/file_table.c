@@ -23,7 +23,7 @@
 #include <linux/sysctl.h>
 #include <linux/percpu_counter.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 /* sysctl tunables... */
 struct files_stat_struct files_stat = {

@@ -11,7 +11,7 @@
 #include <linux/pci.h>
 #include <linux/time.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #include "trace.h"
 #include "trace_output.h"

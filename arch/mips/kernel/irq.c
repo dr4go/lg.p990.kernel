@@ -23,7 +23,7 @@
 #include <linux/kallsyms.h>
 #include <linux/kgdb.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/system.h>
 #include <asm/uaccess.h>
 

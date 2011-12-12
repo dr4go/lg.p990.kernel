@@ -24,7 +24,7 @@
 #include <linux/pci.h>
 #include <linux/rbtree.h>
 #include <linux/spinlock.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/pci-bridge.h>
 #include <asm/ppc-pci.h>
 

@@ -8,7 +8,7 @@
 #include <linux/ftrace.h>
 #include <linux/kernel.h>
 #include <linux/sched.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #ifdef CONFIG_FUNCTION_GRAPH_TRACER
 

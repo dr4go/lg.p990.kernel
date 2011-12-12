@@ -25,7 +25,7 @@
 #include <linux/timer.h>
 #include <linux/workqueue.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #define PHY_BASIC_FEATURES	(SUPPORTED_10baseT_Half | \
 				 SUPPORTED_10baseT_Full | \

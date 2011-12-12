@@ -19,7 +19,7 @@
 #include <linux/mutex.h>
 
 #include <asm/cpudata.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/nmi.h>
 #include <asm/pcr.h>
 

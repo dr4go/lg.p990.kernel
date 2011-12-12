@@ -27,7 +27,7 @@
 #include <linux/types.h>
 #include <linux/slab.h>
 #include <linux/init.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include "crc32defs.h"
 #if CRC_LE_BITS == 8
 #define tole(x) __constant_cpu_to_le32(x)

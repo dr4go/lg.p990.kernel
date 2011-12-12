@@ -35,7 +35,7 @@
 #include <linux/proc_fs.h>
 #include <linux/compat.h>
 #include <linux/smp_lock.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/uaccess.h>
 #include <linux/hw_random.h>
 

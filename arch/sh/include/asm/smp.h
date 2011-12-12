@@ -7,7 +7,7 @@
 #ifdef CONFIG_SMP
 
 #include <linux/spinlock.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/current.h>
 
 #define raw_smp_processor_id()	(current_thread_info()->cpu)

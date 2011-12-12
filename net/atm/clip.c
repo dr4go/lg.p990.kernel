@@ -34,7 +34,7 @@
 #include <asm/byteorder.h> /* for htons etc. */
 #include <asm/system.h> /* save/restore_flags */
 #include <asm/uaccess.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #include "common.h"
 #include "resources.h"

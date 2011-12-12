@@ -62,7 +62,7 @@
  *                          are considered as fatal)
  */
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <linux/wait.h>
 #include <linux/list.h>
 #include <linux/kref.h>

@@ -20,7 +20,7 @@
 #include <net/sock.h>		/* struct sock */
 
 #include <asm/uaccess.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/poll.h>
 
 

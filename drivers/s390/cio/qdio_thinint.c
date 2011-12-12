@@ -9,7 +9,7 @@
  *	      Jan Glauber <jang@linux.vnet.ibm.com>
  */
 #include <linux/io.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/debug.h>
 #include <asm/qdio.h>
 #include <asm/airq.h>

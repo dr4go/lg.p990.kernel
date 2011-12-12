@@ -9,7 +9,7 @@
 #include <linux/types.h>
 
 #ifdef __KERNEL__
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #endif
 
 /*

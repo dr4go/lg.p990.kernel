@@ -25,7 +25,7 @@
 #include <linux/sched.h>
 #include <linux/smp_lock.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/io.h>
 
 #define PHANTOM_VERSION		"n0.9.8"

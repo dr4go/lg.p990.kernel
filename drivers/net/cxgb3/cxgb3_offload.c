@@ -33,7 +33,7 @@
 #include <linux/list.h>
 #include <net/neighbour.h>
 #include <linux/notifier.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <linux/proc_fs.h>
 #include <linux/if_vlan.h>
 #include <net/netevent.h>

@@ -17,7 +17,7 @@
 #include <linux/list.h>
 #include <linux/spinlock.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 struct net_device;
 struct packet_type;

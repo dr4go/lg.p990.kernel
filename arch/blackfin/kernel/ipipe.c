@@ -33,7 +33,7 @@
 #include <linux/unistd.h>
 #include <linux/io.h>
 #include <asm/system.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 DEFINE_PER_CPU(struct pt_regs, __ipipe_tick_regs);
 

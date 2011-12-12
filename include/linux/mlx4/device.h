@@ -37,7 +37,7 @@
 #include <linux/completion.h>
 #include <linux/radix-tree.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 enum {
 	MLX4_FLAG_MSI_X		= 1 << 0,

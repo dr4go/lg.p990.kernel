@@ -9,7 +9,7 @@
 #include <linux/linkage.h>
 #include <linux/bitops.h>
 #include <linux/lockdep.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 struct workqueue_struct;
 

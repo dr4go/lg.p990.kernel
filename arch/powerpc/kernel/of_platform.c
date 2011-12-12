@@ -27,7 +27,7 @@
 #include <asm/topology.h>
 #include <asm/pci-bridge.h>
 #include <asm/ppc-pci.h>
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 /*
  * The list of OF IDs below is used for matching bus types in the

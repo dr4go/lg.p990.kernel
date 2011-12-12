@@ -33,7 +33,7 @@
 #include <linux/timer.h>
 #include <linux/workqueue.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 #include <asm/byteorder.h>
 
 #include "core.h"

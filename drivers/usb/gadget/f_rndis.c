@@ -27,7 +27,7 @@
 #include <linux/etherdevice.h>
 #include <linux/usb/android_composite.h>
 
-#include <linux/atomic.h>
+#include <asm/atomic.h>
 
 #include "u_ether.h"
 #include "rndis.h"

@@ -121,15 +121,16 @@ static inline void atomic_dec(atomic_t *v)
 #define atomic_dec_and_test(v)		(atomic_sub_return(1, (v)) == 0)
 #define atomic_inc_and_test(v)		(atomic_add_return(1, (v)) == 0)
 
-#define __atomic_add_unless(v, a, u)				\
+#define atomic_add_unless(v, a, u)				\
 ({								\
 	int c, old;						\
 	c = atomic_read(v);					\
 	while (c != (u) && (old = atomic_cmpxchg((v), c, c + (a))) != c) \
 		c = old;					\
-	c;							\
+	c != (u);						\
 })
 
+#define atomic_inc_not_zero(v) atomic_add_unless((v), 1, 0)
 
 static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
 {
@@ -149,6 +150,8 @@ static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
 #define smp_mb__after_atomic_dec()	barrier()
 #define smp_mb__before_atomic_inc()	barrier()
 #define smp_mb__after_atomic_inc()	barrier()
+
+#include <asm-generic/atomic-long.h>
 
 #endif /* __KERNEL__ */
 #endif /* _ASM_ATOMIC_H */
