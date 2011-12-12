@@ -29,6 +29,18 @@
 *.bz2
 *.lzma
 *.gcno
+
+#
+# Specific directories / files
+#
+/arch/arm/mach-msm/smd_rpc_sym.c
+/arch/arm/boot/Image
+/arch/arm/boot/zImage
+/drivers/char/defkeymap.c
+/kernel/config_data.h
+/kernel/timeconst.h
+/lib/crc32table.h
+/lib/gen_crc32table
 /scripts
 
 #
@@ -57,7 +69,6 @@ include/linux/compile.h
 include/linux/version.h
 include/linux/utsrelease.h
 include/linux/bounds.h
-arch/arm/mach-msm/smd_rpc_sym.c
 include/generated
 
 # stgit generated dirs
