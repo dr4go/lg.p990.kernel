@@ -205,7 +205,7 @@ static unsigned int cpufreq_interactive_calc_freq(unsigned int cpu)
 static void cpufreq_interactive_freq_change_time_work(struct work_struct *work)
 {
 	unsigned int cpu;
-	cpumask_t tmp_mask = work_cpumask;
+	cpumask_t *tmp_mask = &work_cpumask;
 
 	for_each_cpu(cpu, tmp_mask) {
 		if (!suspended && (target_freq >= freq_threshold || target_freq == policy->max) ) {
