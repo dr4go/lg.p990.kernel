@@ -2746,12 +2746,8 @@ int skb_gro_receive(struct sk_buff **head, struct sk_buff *skb)
 
 merge:
 	if (offset > headlen) {
-		unsigned int eat = offset - headlen;
-
-		skbinfo->frags[0].page_offset += eat;
-		skbinfo->frags[0].size -= eat;
-		skb->data_len -= eat;
-		skb->len -= eat;
+		skbinfo->frags[0].page_offset += offset - headlen;
+		skbinfo->frags[0].size -= offset - headlen;
 		offset = headlen;
 	}
 

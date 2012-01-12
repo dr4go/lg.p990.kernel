@@ -53,7 +53,6 @@
 /* FTDI 2332C Dual channel device, side A=245 FIFO (JTAG), Side B=RS232 UART */
 #define LMI_LM3S_DEVEL_BOARD_PID	0xbcd8
 #define LMI_LM3S_EVAL_BOARD_PID		0xbcd9
-#define LMI_LM3S_ICDI_BOARD_PID		0xbcda
 
 #define FTDI_TURTELIZER_PID	0xBDC8 /* JTAG/RS-232 adapter by egnite GmBH */
 
@@ -111,7 +110,6 @@
 
 /* Propox devices */
 #define FTDI_PROPOX_JTAGCABLEII_PID	0xD738
-#define FTDI_PROPOX_ISPCABLEIII_PID	0xD739
 
 /* Lenz LI-USB Computer Interface. */
 #define FTDI_LENZ_LIUSB_PID	0xD780
@@ -353,7 +351,6 @@
  */
 #define FTDI_4N_GALAXY_DE_1_PID	0xF3C0
 #define FTDI_4N_GALAXY_DE_2_PID	0xF3C1
-#define FTDI_4N_GALAXY_DE_3_PID	0xF3C2
 
 /*
  * Linx Technologies product ids
@@ -421,11 +418,9 @@
 #define PROTEGO_SPECIAL_4	0xFC73	/* special/unknown device */
 
 /*
- * Sony Ericsson product ids
+ * DSS-20 Sync Station for Sony Ericsson P800
  */
-#define FTDI_DSS20_PID		0xFC82	/* DSS-20 Sync Station for Sony Ericsson P800 */
-#define FTDI_URBAN_0_PID	0xFC8A	/* Sony Ericsson Urban, uart #0 */
-#define FTDI_URBAN_1_PID	0xFC8B	/* Sony Ericsson Urban, uart #1 */
+#define FTDI_DSS20_PID          0xFC82
 
 /* www.irtrans.de device */
 #define FTDI_IRTRANS_PID 0xFC60 /* Product Id */
@@ -495,11 +490,6 @@
 #define FTDI_IBS_PROD_PID	0xff3f  /* future device */
 /* www.canusb.com Lawicel CANUSB device (FTDI_VID) */
 #define FTDI_CANUSB_PID 0xFFA8 /* Product Id */
-
-/*
- * TavIR AVR product ids (FTDI_VID)
- */
-#define FTDI_TAVIR_STK500_PID	0xFA33	/* STK500 AVR programmer */
 
 
 
@@ -1168,8 +1158,4 @@
 /* USB-Nano-485*/
 #define FTDI_CTI_NANO_PID	0xF60B
 
-/*
- * ZeitControl cardsystems GmbH rfid-readers http://zeitconrol.de
- */
-/* TagTracer MIFARE*/
-#define FTDI_ZEITCONTROL_TAGTRACE_MIFARE_PID	0xF7C0
+
