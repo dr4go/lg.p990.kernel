@@ -1980,7 +1980,7 @@ static int cfq_cic_link(struct cfq_data *cfqd, struct io_context *ioc,
 		}
 	}
 
-	if (ret && ret != -EEXIST)
+	if (ret)
 		printk(KERN_ERR "cfq: cic link failed!\n");
 
 	return ret;
@@ -1996,7 +1996,6 @@ cfq_get_io_context(struct cfq_data *cfqd, gfp_t gfp_mask)
 {
 	struct io_context *ioc = NULL;
 	struct cfq_io_context *cic;
-	int ret;
 
 	might_sleep_if(gfp_mask & __GFP_WAIT);
 
@@ -2004,7 +2003,6 @@ cfq_get_io_context(struct cfq_data *cfqd, gfp_t gfp_mask)
 	if (!ioc)
 		return NULL;
 
-retry:
 	cic = cfq_cic_lookup(cfqd, ioc);
 	if (cic)
 		goto out;
@@ -2013,12 +2011,7 @@ retry:
 	if (cic == NULL)
 		goto err;
 
-	ret = cfq_cic_link(cfqd, ioc, cic, gfp_mask);
-	if (ret == -EEXIST) {
-		/* someone has linked cic to ioc already */
-		cfq_cic_free(cic);
-		goto retry;
-	} else if (ret)
+	if (cfq_cic_link(cfqd, ioc, cic, gfp_mask))
 		goto err_free;
 
 out:
