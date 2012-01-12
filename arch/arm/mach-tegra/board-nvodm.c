@@ -1548,7 +1548,7 @@ static struct platform_device star_wm8994_pdevice =
 #define STAR_RAM_CONSOLE_SIZE	(128*SZ_1K) 	
 #elif defined (CONFIG_MODEM_IFX)
 #ifdef USE_FAKE_SHMOO
-#define STAR_RAM_CONSOLE_BASE 	(447*SZ_1M)
+#define STAR_RAM_CONSOLE_BASE 	(415*SZ_1M)
 #else
 #define STAR_RAM_CONSOLE_BASE 	(383*SZ_1M)
 #endif

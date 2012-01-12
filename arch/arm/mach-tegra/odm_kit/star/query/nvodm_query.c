@@ -1466,7 +1466,7 @@ NvU32 NvOdmQueryMemSize(NvOdmMemoryType MemType)
 NvU32 NvOdmQueryCarveoutSize(void)
 {
 #ifdef USE_FAKE_SHMOO
-	return 0x04000000; // 128 MB -> 64MB
+	return 0x06000000; // 128 MB -> 96MB
 #else
     //20100802 taewan.kim@lge.com increase carveout memory
     return 0x08000000; // 128 MB <- 64MB
