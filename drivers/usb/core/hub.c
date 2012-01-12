@@ -22,7 +22,6 @@
 #include <linux/kthread.h>
 #include <linux/mutex.h>
 #include <linux/freezer.h>
-#include <linux/usb/quirks.h>
 
 #include <asm/uaccess.h>
 #include <asm/byteorder.h>
@@ -648,8 +647,6 @@ static void hub_init_func3(struct work_struct *ws);
 static void hub_activate(struct usb_hub *hub, enum hub_activation_type type)
 {
 	struct usb_device *hdev = hub->hdev;
-	struct usb_hcd *hcd;
-	int ret;
 	int port1;
 	int status;
 	bool need_debounce_delay = false;
@@ -688,25 +685,6 @@ static void hub_activate(struct usb_hub *hub, enum hub_activation_type type)
 			atomic_set(&to_usb_interface(hub->intfdev)->
 					pm_usage_cnt, 1);
 			return;		/* Continues at init2: below */
-		} else if (type == HUB_RESET_RESUME) {
-			/* The internal host controller state for the hub device
-			 * may be gone after a host power loss on system resume.
-			 * Update the device's info so the HW knows it's a hub.
-			 */
-			hcd = bus_to_hcd(hdev->bus);
-			if (hcd->driver->update_hub_device) {
-				ret = hcd->driver->update_hub_device(hcd, hdev,
-						&hub->tt, GFP_NOIO);
-				if (ret < 0) {
-					dev_err(hub->intfdev, "Host not "
-							"accepting hub info "
-							"update.\n");
-					dev_err(hub->intfdev, "LS/FS devices "
-							"and hubs may not work "
-							"under this hub\n.");
-				}
-			}
-			hub_power_on(hub, true);
 		} else {
 			hub_power_on(hub, true);
 		}
@@ -1424,11 +1402,11 @@ void usb_set_device_state(struct usb_device *udev,
 					|| new_state == USB_STATE_SUSPENDED)
 				;	/* No change to wakeup settings */
 			else if (new_state == USB_STATE_CONFIGURED)
-				device_set_wakeup_capable(&udev->dev,
+				device_init_wakeup(&udev->dev,
 					(udev->actconfig->desc.bmAttributes
 					 & USB_CONFIG_ATT_WAKEUP));
 			else
-				device_set_wakeup_capable(&udev->dev, 0);
+				device_init_wakeup(&udev->dev, 0);
 		}
 		if (udev->state == USB_STATE_SUSPENDED &&
 			new_state != USB_STATE_SUSPENDED)
@@ -1530,15 +1508,6 @@ static inline void usb_stop_pm(struct usb_device *udev)
 
 #endif
 
-static void hub_free_dev(struct usb_device *udev)
-{
-	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
-
-	/* Root hubs aren't real devices, so don't free HCD resources */
-	if (hcd->driver->free_dev && udev->parent)
-		hcd->driver->free_dev(hcd, udev);
-}
-
 /**
  * usb_disconnect - disconnect a device (usbcore-internal)
  * @pdev: pointer to device being disconnected
@@ -1608,8 +1577,6 @@ void usb_disconnect(struct usb_device **pdev)
 	spin_unlock_irq(&device_state_lock);
 
 	usb_stop_pm(udev);
-
-	hub_free_dev(udev);
 
 	put_device(&udev->dev);
 }
@@ -1786,17 +1753,11 @@ int usb_new_device(struct usb_device *udev)
 {
 	int err;
 
-	if (udev->parent) {
-		/* Increment the parent's count of unsuspended children */
+	/* Increment the parent's count of unsuspended children */
+	if (udev->parent)
 		usb_autoresume_device(udev->parent);
 
-		/* Initialize non-root-hub device wakeup to disabled;
-		 * device (un)configuration controls wakeup capable
-		 * sysfs power/wakeup controls wakeup enabled/disabled
-		 */
-		device_init_wakeup(&udev->dev, 0);
-	}
-
+	usb_detect_quirks(udev);
 	err = usb_enumerate_device(udev);	/* Read descriptors */
 	if (err < 0)
 		goto fail;
@@ -2711,11 +2672,6 @@ hub_port_init (struct usb_hub *hub, struct usb_device *udev, int port1,
 		udev->ttport = hdev->ttport;
 	} else if (udev->speed != USB_SPEED_HIGH
 			&& hdev->speed == USB_SPEED_HIGH) {
-		if (!hub->tt.hub) {
-			dev_err(&udev->dev, "parent hub has no TT\n");
-			retval = -EINVAL;
-			goto fail;
-		}
 		udev->tt = &hub->tt;
 		udev->ttport = port1;
 	}
@@ -2854,16 +2810,13 @@ hub_port_init (struct usb_hub *hub, struct usb_device *udev, int port1,
 	else
 		i = udev->descriptor.bMaxPacketSize0;
 	if (le16_to_cpu(udev->ep0.desc.wMaxPacketSize) != i) {
-		if (udev->speed == USB_SPEED_LOW ||
+		if (udev->speed != USB_SPEED_FULL ||
 				!(i == 8 || i == 16 || i == 32 || i == 64)) {
-			dev_err(&udev->dev, "Invalid ep0 maxpacket: %d\n", i);
+			dev_err(&udev->dev, "ep0 maxpacket = %d\n", i);
 			retval = -EMSGSIZE;
 			goto fail;
 		}
-		if (udev->speed == USB_SPEED_FULL)
-			dev_dbg(&udev->dev, "ep0 maxpacket = %d\n", i);
-		else
-			dev_warn(&udev->dev, "Using ep0 maxpacket: %d\n", i);
+		dev_dbg(&udev->dev, "ep0 maxpacket = %d\n", i);
 		udev->ep0.desc.wMaxPacketSize = cpu_to_le16(i);
 		usb_ep0_reinit(udev);
 	}
@@ -3099,10 +3052,6 @@ static void hub_port_connect_change(struct usb_hub *hub, int port1,
 		if (status < 0)
 			goto loop;
 
-		usb_detect_quirks(udev);
-		if (udev->quirks & USB_QUIRK_DELAY_INIT)
-			msleep(1000);
-
 		/* consecutive bus-powered hubs aren't reliable; they can
 		 * violate the voltage drop budget.  if the new child has
 		 * a "powered" LED, users should notice we didn't enable it
@@ -3181,7 +3130,6 @@ loop_disable:
 loop:
 		usb_ep0_reinit(udev);
 		release_address(udev);
-		hub_free_dev(udev);
 		usb_put_dev(udev);
 		if ((status == -ENOTCONN) || (status == -ENOTSUPP))
 			break;
