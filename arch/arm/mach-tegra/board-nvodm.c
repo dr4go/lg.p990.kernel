@@ -32,6 +32,8 @@
 #include <linux/console.h>
 #include <linux/reboot.h>
 
+#define USE_FAKE_SHMOO
+
 //20100419 bergkamp.cho@lge.com for headset detetion [LGE_START]
 #if defined(CONFIG_MACH_STAR)
 #include <linux/switch.h>	//20100419 bergkamp.cho@lge.com for Headset Detection [LGE]
@@ -1545,7 +1547,11 @@ static struct platform_device star_wm8994_pdevice =
 #define STAR_RAM_CONSOLE_BASE 	((512-CARVEOUT_SIZE-RAM_CONSOLE_RESERVED_SIZE)*SZ_1M)
 #define STAR_RAM_CONSOLE_SIZE	(128*SZ_1K) 	
 #elif defined (CONFIG_MODEM_IFX)
+#ifdef USE_FAKE_SHMOO
+#define STAR_RAM_CONSOLE_BASE 	(415*SZ_1M)
+#else
 #define STAR_RAM_CONSOLE_BASE 	(383*SZ_1M)
+#endif
 #define STAR_RAM_CONSOLE_SIZE	(512*SZ_1K)
 #endif
 static struct resource ram_console_resource[] = {
