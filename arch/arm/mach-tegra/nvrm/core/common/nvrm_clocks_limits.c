@@ -75,7 +75,7 @@
 // TEGRA_OC: SubClockId-> 0
 // TEGRA_OC: MinKHz-> 32
 
-#define MAX_OVERCLOCK (1408000)
+#define MAX_OVERCLOCK (1552000)
 
 NvRmCpuShmoo fake_CpuShmoo; // Pointer to fake CpuShmoo values
 NvU32 FakeShmooVmaxIndex = 7; // Max voltage index in the voltage tab (size-1)
@@ -86,9 +86,9 @@ NvU32 FakeShmooVoltages[] = {
 	850,
 	900,
 	1000,
-	1050,
 	1125,
-	1250
+	1250,
+	1350
 };
 
 NvRmScaledClkLimits FakepScaledCpuLimits = {
@@ -100,11 +100,11 @@ NvRmScaledClkLimits FakepScaledCpuLimits = {
 		216000,
 		389000,
 		503000,
-		800000,
-		1015000,
-		1100000,
+		816000,
+		1040000,
 		1216000,
-		1408000
+		1408000,
+		1552000
 	}
 };
 #endif // USE_FAKE_SHMOO
