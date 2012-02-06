@@ -1,0 +1,93 @@
+#
+# NOTE! Don't add files that are generated in specific
+# subdirectories here. Add them in the ".gitignore" file
+# in that subdirectory instead.
+#
+# NOTE! Please use 'git ls-files -i --exclude-standard'
+# command after changing this file, to see if there are
+# any tracked files which get ignored after the change.
+#
+# Normal rules
+#
+.*
+*.o
+*.o.*
+*.a
+*.s
+*.ko
+*.so
+*.so.dbg
+*.mod.c
+*.i
+*.lst
+*.cpio
+*.symtypes
+*.order
+*.elf
+*.bin
+*.gz
+*.bz2
+*.lzma
+*.gcno
+
+#
+# Specific directories / files
+#
+/arch/arm/mach-msm/smd_rpc_sym.c
+/arch/arm/boot/Image
+/arch/arm/boot/zImage
+/drivers/char/defkeymap.c
+/kernel/config_data.h
+/kernel/timeconst.h
+/lib/crc32table.h
+/lib/gen_crc32table
+/scripts
+
+#
+# Top-level generic files
+#
+tags
+TAGS
+vmlinux
+vmlinux.lds
+System.map
+Module.markers
+Module.symvers
+!.gitignore
+!.mailmap
+gen_init_cpio
+
+#
+# Generated include files
+#
+include/asm
+include/asm-*/asm-offsets.h
+include/asm-arm
+include/config
+include/linux/autoconf.h
+include/linux/compile.h
+include/linux/version.h
+include/linux/utsrelease.h
+include/linux/bounds.h
+include/generated
+
+# stgit generated dirs
+patches-*
+
+# quilt's files
+patches
+series
+
+# cscope files
+cscope.*
+ncscope.*
+
+# gnu global files
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+*.orig
+*~
+\#*#
