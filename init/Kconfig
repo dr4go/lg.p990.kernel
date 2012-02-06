@@ -1054,18 +1054,23 @@ config COMPAT_BRK
 
 choice
 	prompt "Choose SLAB allocator"
-	default SLUB
+	default SLQB_ALLOCATOR
 	help
 	   This option allows to select a slab allocator.
 
-config SLAB
+config SLAB_ALLOCATOR
 	bool "SLAB"
 	help
 	  The regular slab allocator that is established and known to work
 	  well in all environments. It organizes cache hot objects in
 	  per cpu and per node queues.
 
-config SLUB
+config SLAB
+	bool
+	default y
+	depends on SLAB_ALLOCATOR
+
+config SLUB_ALLOCATOR
 	bool "SLUB (Unqueued Allocator)"
 	help
 	   SLUB is a slab allocator that minimizes cache line usage
@@ -1074,6 +1079,21 @@ config SLUB
 	   of queues of objects. SLUB can use memory efficiently
 	   and has enhanced diagnostics. SLUB is the default choice for
 	   a slab allocator.
+
+config SLUB
+	bool
+	default y
+	depends on SLUB_ALLOCATOR
+
+config SLQB_ALLOCATOR
+	bool "SLQB (Qeued allocator)"
+	help
+	  SLQB is a proposed new slab allocator.
+
+config SLQB
+	bool
+	default y
+	depends on SLQB_ALLOCATOR
 
 config SLOB
 	depends on EMBEDDED
@@ -1133,7 +1153,7 @@ config HAVE_GENERIC_DMA_COHERENT
 config SLABINFO
 	bool
 	depends on PROC_FS
-	depends on SLAB || SLUB_DEBUG
+	depends on SLAB || SLUB_DEBUG || SLQB
 	default y
 
 config RT_MUTEXES
